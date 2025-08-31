@@ -8,7 +8,7 @@ use tokio::signal::unix::{signal, SignalKind};
 use tonic::transport::{Certificate, Identity, Server, ServerTlsConfig};
 use tonic::{async_trait, Request, Response, Status};
 
-/// CLI arguments as required by the spec, <https://github.com/crossplane/crossplane/blob/main/contributing/specifications/functions.md>
+/// CLI arguments as required by the [composite function spec](https://github.com/crossplane/crossplane/blob/main/contributing/specifications/functions.md).
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 pub struct Args {
