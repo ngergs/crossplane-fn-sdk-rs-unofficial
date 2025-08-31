@@ -34,6 +34,17 @@ jobs:
           cargo clippy
           cargo install --locked cargo-deny
           cargo deny check license
+      - name: k3d integration test
+        run: |-
+          sudo wget -O /usr/bin/crossplane https://releases.crossplane.io/stable/current/bin/linux_amd64/crank
+          sudo chmod +x /usr/bin/crossplane
+          gh release download --repo k3d-io/k3d --pattern k3d-linux-amd64 --output k3d
+          sudo mv k3d /usr/bin/k3d
+          sudo chmod +x /usr/bin/k3d
+          cd example/local_test
+          ./run.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run release-plz
         uses: release-plz/action@v0.5
         with:

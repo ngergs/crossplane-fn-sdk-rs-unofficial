@@ -44,3 +44,4 @@ kustomize build k3d/crossplane-providers --enable-helm | kubectl apply --context
 # make sure our function Configuration is ready
 retry kubectl get Configs
 kustomize build k3d --enable-helm | kubectl apply --context ${CONTEXT} -f -
+retry kubectl get ConfigMap -n test evening
