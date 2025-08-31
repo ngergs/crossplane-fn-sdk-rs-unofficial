@@ -19,7 +19,6 @@ for cmd in $executables; do
     fi
 done
 
-
 docker build -t crossplane-rs-config-fn -f ../Dockerfile ../..
 
 k3d cluster create --config k3d.yaml
