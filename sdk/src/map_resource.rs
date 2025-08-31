@@ -27,13 +27,15 @@ pub trait TryFromResource: DeserializeOwned {
     /// - If unmarshalling the type-fixed JSON representation to the target type fails.
     /// - On any mapping incompatibility between the types.
     /// - The default implementation will error if any fields would be ignored during unmarshalling.
-    ///   Exceptions are `apiVersion` and `kind` which are e.g. in `kube` and `k8s-openapi` not modelled as struct fields but are associated
-    ///   to the type not the instantiation. Therefore, they are ignored from the perspective of `serde`.
+    ///   There are a couple exception to this rule. `apiVersion` and `kind` are allowed to be ignored as
+    ///   they are e.g. in `kube` and `k8s-openapi` not modelled as struct fields but are associated to
+    ///   the type not the instantiation. Therefore, they are ignored from the perspective of `serde`.
     ///   Another exception are `spec.crossplane`, `status.crossplane` and `status.conditions` as they are
     ///   [reserved by crossplane](https://docs.crossplane.io/latest/composition/composite-resource-definitions/#crossplane-reserved-fields)
     ///   and can be ignored for xrd type representations as they are handled by the protobuf `Resources` wrapper.
-    ///   Non-default implementations of this trait might have relaxed or stricter validations. E.g. for
-    ///   `k8s-openapi` types only `apiVersion` and `kind` will be accepted to be ignored.
+    ///   Non-default implementations of this trait might have relaxed or stricter validations. E.g.
+    ///   the `k8s-openapi`-feature gated blanket implementation for `k8s_openapi::Metadata` types
+    ///   only `apiVersion` and `kind` will be accepted to be ignored.
     fn try_from_resource(value: Resource) -> Result<Self, Error> {
         try_from_resource(
             value,
