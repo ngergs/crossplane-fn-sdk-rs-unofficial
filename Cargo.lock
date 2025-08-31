@@ -366,7 +366,7 @@ dependencies = [
 name = "crossplane-fn-sdk-example-unofficial"
 version = "0.1.0"
 dependencies = [
- "crossplane-fn-sdk-unofficial",
+ "crossplane-fn-sdk-unofficial 0.2.2",
  "k8s-openapi",
  "kube",
  "serde",
@@ -379,6 +379,25 @@ dependencies = [
 [[package]]
 name = "crossplane-fn-sdk-unofficial"
 version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "544142eaf688e5357f36fa4636492f7aec7bf2b8efe5d37dcedb4c7ae4a8eb49"
+dependencies = [
+ "clap",
+ "k8s-openapi",
+ "prost",
+ "prost-types",
+ "prost-wkt-types",
+ "serde",
+ "serde_ignored",
+ "serde_json",
+ "tokio",
+ "tonic",
+ "tonic-prost",
+]
+
+[[package]]
+name = "crossplane-fn-sdk-unofficial"
+version = "0.3.0"
 dependencies = [
  "clap",
  "k8s-openapi",
