@@ -1,5 +1,6 @@
 use crate::function::composite_function;
-use crossplane_fn_sdk_unofficial::{run_server, tokio, Args, Parser};
+use crossplane_fn_sdk_unofficial::clap::Parser;
+use crossplane_fn_sdk_unofficial::{run_server, tokio, Args};
 use tracing::Level;
 
 pub mod function;

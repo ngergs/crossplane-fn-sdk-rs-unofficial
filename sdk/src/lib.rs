@@ -64,7 +64,7 @@
 //! #    )
 //! # });
 //! ```
-pub use clap::Parser;
+pub use clap;
 pub use tokio;
 pub use tonic;
 
