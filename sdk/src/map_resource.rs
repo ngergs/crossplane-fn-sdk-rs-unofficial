@@ -43,6 +43,11 @@ pub trait TryFromResource: DeserializeOwned {
                 "apiVersion",
                 "kind",
                 "spec.crossplane",
+                // This is not ideal. We need it for the case that there is no status modelled at all
+                // in the respective resource but on the other hand it could lead to silent ignores of
+                // unmapped status entries for this scenario.
+                // However, as status is -- other than spec -- a rather informative and cumulative
+                // this is 'ok' but could be improved in the future.
                 "status",
                 "status.crossplane",
                 "status.conditions",

@@ -38,5 +38,11 @@ spec:
               required:
                 - template
                 - valueSets
+            # must model a barebone status even if not interested to allow deserialize checks
+            # to distinguish between crossplane internal `status.crossplane` and `status.conditions`
+            # (which are fine to ignore as they are mapped to other fields in the protobuf schema)
+            # and other spurious `status`-entries (that should cause errors)
+            status:
+              type: object
           required:
             - spec
