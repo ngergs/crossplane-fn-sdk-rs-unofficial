@@ -12,7 +12,7 @@ publish = false
 pedantic = "warn"
 
 [dependencies]
-tonic-prost-build = { version = "0.14.1", features = ["cleanup-markdown"] }
+tonic-prost-build = { version = "0.14.2", features = ["cleanup-markdown"] }
 itertools = "0.14.0"
-tempfile = "3.21.0"
-ureq = "3.1.0"
+tempfile = "3.23.0"
+ureq = "3.1.4"

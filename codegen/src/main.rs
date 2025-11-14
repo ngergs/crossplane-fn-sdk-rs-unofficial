@@ -12,7 +12,7 @@ const TARGET_PATH: &str = "crossplane.rs";
 /// provided tag argument and generates Rust types from it.
 /// Errors if feature `codegen` is disabled (default).
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let tag = args().skip(2).exactly_one()?;
+    let tag = args().skip(1).exactly_one()?;
     let mut proto_file = NamedTempFile::new()?;
     let proto_url = &format!(
         "https://raw.githubusercontent.com/crossplane/crossplane/refs/tags/{tag}/proto/fn/v1/run_function.proto"

@@ -8,5 +8,5 @@ This crate won't be published to crates.io.
 ## Usage
 Run in [../sdk](../sdk):
 ```bash
-cargo run --manifest-path=../codegen/Cargo.toml codegen v2.0.2
+cargo run --manifest-path=../codegen/Cargo.toml -- v2.1.1
 ```
