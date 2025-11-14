@@ -10,7 +10,7 @@
 //! the sdk-user.
 //!
 //! Crossplane expects it's users to only output those fields they want to influence into the desired state.
-//! If you are looking for a crate that helps deriving partial representation of Kubernetes types my other crate [`optionable`]
+//! If you are looking for a crate that helps deriving partial representation of Kubernetes types my other crate [`optionable`](https://crates.io/crates/optionable)
 //! might be useful as well.
 //!
 //! # Compile-time dependencies
