@@ -1,12 +1,12 @@
 # needs to run in ../ to include the sdk directory in the docker environment
-FROM rust:1.89-bookworm AS builder
+FROM rust:1.91-trixie AS builder
 WORKDIR /usr/src/crossplane-fn-sdk-example-unofficial
 COPY . .
 RUN apt-get update && apt-get install -y protobuf-compiler && rm -rf /var/lib/apt/lists/* && cargo install kopium
 RUN cd example && cargo install --path .
 
 # rust builder image also uses debian 12 so same glibc version
-FROM gcr.io/distroless/cc-debian12:nonroot
+FROM gcr.io/distroless/cc-debian13:nonroot
 COPY --from=builder /usr/local/cargo/bin/crossplane-fn-sdk-example-unofficial /usr/local/bin/crossplane-fn-sdk-example-unofficial
 EXPOSE 9443
 ENTRYPOINT ["/usr/local/bin/crossplane-fn-sdk-example-unofficial"]
