@@ -9,6 +9,10 @@
 //! which will start a gRPC server that handles the composite function requests with the business logic provided by
 //! the sdk-user.
 //!
+//! Crossplane expects it's users to only output those fields they want to influence into the desired state.
+//! If you are looking for a crate that helps deriving partial representation of Kubernetes types my other crate [`optionable`]
+//! might be useful as well.
+//!
 //! # Compile-time dependencies
 //! The protocol buffer library [prost-wkt-types](https://docs.rs/prost-wkt-types/latest/prost_wkt_types) used by the sdk requires [protoc](https://protobuf.dev/installation/) at compile-time.
 //!
