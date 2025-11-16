@@ -1,9 +1,5 @@
 use crate::crossplane::Resource;
 use crate::error::error_invalid_data;
-#[cfg(feature = "k8s-openapi")]
-use k8s_openapi::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-#[cfg(feature = "k8s-openapi")]
-use k8s_openapi::Metadata;
 use serde::de::{DeserializeOwned, IntoDeserializer};
 use serde::Serialize;
 use serde_json::Value;
@@ -111,18 +107,11 @@ pub trait TryIntoResource: Sized + Serialize {
         })
     }
 }
+#[cfg(feature = "kube")]
+impl<T> TryFromResource for T where T: DeserializeOwned + kube::Resource<DynamicType = ()> {}
 
-#[cfg(feature = "k8s-openapi")]
-impl<T> TryFromResource for T
-where
-    T: DeserializeOwned + Metadata<Ty = ObjectMeta>,
-{
-    fn try_from_resource(value: Resource) -> Result<Self, Error> {
-        try_from_resource(value, ["apiVersion", "kind"])
-    }
-}
-#[cfg(feature = "k8s-openapi")]
-impl<T> TryIntoResource for T where T: Serialize + Metadata<Ty = ObjectMeta> {}
+#[cfg(feature = "kube")]
+impl<T> TryIntoResource for T where T: Serialize + kube::Resource<DynamicType = ()> {}
 
 /// This function traverses the json value and tries to cast all float values to i64 values. It only changes those where the cast succeeds without data loss.
 fn json_value_cast_float_to_i64(val: &mut Value) {
@@ -173,7 +162,7 @@ fn from_value_strict<T: DeserializeOwned, const N: usize>(
 
 #[cfg(test)]
 mod tests {
-    #[cfg(feature = "k8s-openapi")]
+    #[cfg(feature = "kube")]
     use crate::map_resource::from_value_strict;
     use crate::map_resource::json_value_cast_float_to_i64;
     use k8s_openapi::api::core::v1::ConfigMap;
@@ -206,7 +195,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(feature = "k8s-openapi")]
+    #[cfg(feature = "kube")]
     fn unmarshall_with_unsupported_field() {
         let res_json = r#"{"apiVersion": "v1",
 "kind": "ConfigMap",
