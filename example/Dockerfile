@@ -5,7 +5,7 @@ COPY . .
 RUN apt-get update && apt-get install -y protobuf-compiler && rm -rf /var/lib/apt/lists/* && cargo install kopium
 RUN cd example && cargo install --path .
 
-# rust builder image also uses debian 12 so same glibc version
+# rust builder image also uses debian 13 so same glibc version
 FROM gcr.io/distroless/cc-debian13:nonroot
 COPY --from=builder /usr/local/cargo/bin/crossplane-fn-sdk-example-unofficial /usr/local/bin/crossplane-fn-sdk-example-unofficial
 EXPOSE 9443
